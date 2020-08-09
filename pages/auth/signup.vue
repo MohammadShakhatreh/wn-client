@@ -4,20 +4,30 @@
       <v-card-title>Sign Up</v-card-title>
       <v-card-text>
         <v-form>
-          <v-text-field label="Full name" type="text" outlined></v-text-field>
-          <v-text-field label="Username" type="text" outlined></v-text-field>
           <v-text-field
+            v-model="form.name"
+            label="Full name"
+            type="text"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            v-model="form.username"
+            label="Username"
+            type="text"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            v-model="form.password"
             label="Password"
             type="password"
             outlined
           ></v-text-field>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn large @click="submit">Sign Up</v-btn>
-          </v-card-actions>
         </v-form>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn large @click="submit">Sign Up</v-btn>
+      </v-card-actions>
     </v-card>
   </v-layout>
 </template>

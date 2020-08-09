@@ -5,24 +5,25 @@
       <v-card-text>
         <v-form>
           <v-text-field
+            v-model="form.username"
             label="Username"
             type="text"
             prepend-inner-icon="mdi-account"
             outlined
           ></v-text-field>
           <v-text-field
+            v-model="form.password"
             label="Password"
             type="password"
             prepend-inner-icon="mdi-lock"
             outlined
           ></v-text-field>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn large @click="submit">Log In</v-btn>
-          </v-card-actions>
         </v-form>
       </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn large @click="submit">Log In</v-btn>
+      </v-card-actions>
     </v-card>
   </v-layout>
 </template>
@@ -39,7 +40,9 @@ export default {
   },
 
   methods: {
-    submit() {},
+    submit() {
+      console.log(this.form)
+    },
   },
 }
 </script>
