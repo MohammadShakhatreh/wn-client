@@ -29,7 +29,13 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Fira+Mono',
+      },
+    ],
   },
   /*
    ** Global CSS
@@ -84,6 +90,12 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
         },
+      },
+    },
+    treeShake: true,
+    defaultAssets: {
+      font: {
+        family: 'Fira Mono',
       },
     },
   },
