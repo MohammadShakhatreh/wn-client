@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -15,7 +17,7 @@ export default {
    */
   head: {
     titleTemplate: (title) =>
-      title ? `${title} | World Navigator` : 'World Navigator',
+      title ? `${title} | ${process.env.APP_NAME}` : process.env.APP_NAME,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -70,10 +72,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? process.env.BASE_URL
-        : 'http://localhost:8080',
+    baseURL: process.env.BASE_URL,
   },
   /*
    ** vuetify module configuration
