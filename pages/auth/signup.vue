@@ -2,8 +2,8 @@
   <v-layout class="mt-16 pt-16" column justify-center align-center>
     <v-card class="pa-5" min-width="400">
       <v-card-title>Sign Up</v-card-title>
-      <v-card-text>
-        <v-form>
+      <v-form @submit.prevent="submit">
+        <v-card-text>
           <v-text-field
             v-model="form.name"
             label="Full name"
@@ -22,18 +22,23 @@
             type="password"
             outlined
           ></v-text-field>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn large @click="submit">Sign Up</v-btn>
-      </v-card-actions>
+          <span class="text-caption"
+            >Already have an account?
+            <nuxt-link to="/auth/login">Log In</nuxt-link></span
+          >
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn large type="submit">Sign Up</v-btn>
+        </v-card-actions>
+      </v-form>
     </v-card>
   </v-layout>
 </template>
 
 <script>
 export default {
+  auth: 'guest',
   data() {
     return {
       form: {
@@ -45,7 +50,24 @@ export default {
   },
 
   methods: {
-    submit() {},
+    submit() {
+      // eslint-disable-next-line
+      this.$axios
+        .post('/users/', this.form)
+        .then((data) => {
+          this.$auth.loginWith('local', {
+            data: {
+              username: this.form.username,
+              password: this.form.password,
+            },
+          })
+        })
+        .catch(() => this.$toast.error('Something went wrong!'))
+    },
+  },
+
+  head: {
+    title: 'Sign Up',
   },
 }
 </script>

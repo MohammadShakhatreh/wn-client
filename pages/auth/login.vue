@@ -2,8 +2,8 @@
   <v-layout class="mt-16 pt-16" column justify-center align-center>
     <v-card class="pa-5" min-width="400">
       <v-card-title>Log In</v-card-title>
-      <v-card-text>
-        <v-form>
+      <v-form @submit.prevent="submit">
+        <v-card-text>
           <v-text-field
             v-model="form.username"
             label="Username"
@@ -18,18 +18,23 @@
             prepend-inner-icon="mdi-lock"
             outlined
           ></v-text-field>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn large @click="submit">Log In</v-btn>
-      </v-card-actions>
+          <span class="text-caption"
+            >You don't have an account?
+            <nuxt-link to="/auth/signup">Sign Up</nuxt-link></span
+          >
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn large type="submit">Log In</v-btn>
+        </v-card-actions>
+      </v-form>
     </v-card>
   </v-layout>
 </template>
 
 <script>
 export default {
+  auth: 'guest',
   data() {
     return {
       form: {
@@ -38,11 +43,17 @@ export default {
       },
     }
   },
-
   methods: {
     submit() {
-      console.log(this.form)
+      this.$auth
+        .loginWith('local', {
+          data: this.form,
+        })
+        .catch(() => this.$toast.error('Bad Credentials!'))
     },
+  },
+  head: {
+    title: 'Log In',
   },
 }
 </script>
