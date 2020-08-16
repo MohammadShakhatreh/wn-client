@@ -17,7 +17,7 @@ export default {
    */
   head: {
     titleTemplate: (title) =>
-      title ? `${title} | ${process.env.APP_NAME}` : process.env.APP_NAME,
+      title ? `${title} | World Navigator` : 'World Navigator',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
